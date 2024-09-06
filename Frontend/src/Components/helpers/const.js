@@ -1,1 +1,1 @@
-export const cameratrigerurl = "http://localhost:5000/open-camera"
+export const cameratrigerurl = "http://localhost:5000"

@@ -17,14 +17,6 @@ function Custompage() {
                                 onClick={handleCameraClick}>
                                 Click here
                             </button>
-                            <h1>Live Video Stream</h1>
-                            <video
-                                src="http://localhost:5000/video_feed"  // Flask video feed URL
-                                width="600"
-                                height="400"
-                                controls
-                                autoPlay
-                            ></video>
                         </div>
                     </div>
                     <div className="h-full w-1/2 py-5">
