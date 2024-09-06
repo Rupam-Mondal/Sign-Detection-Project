@@ -21,12 +21,12 @@ mpHands = mp.solutions.hands
 hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mpDraw = mp.solutions.drawing_utils
 
-json_file = open('D:/HackHITK/Sign-Detection-Project/model/2nd model/model1.json', 'r')
+json_file = open('../model/model1/model1.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 # load weights into new model
-loaded_model.load_weights("D:/HackHITK/Sign-Detection-Project/model/2nd model/model1.weights.h5")
+loaded_model.load_weights("../model/model1/model1.weights.h5")
 def calc_landmark_list(image, landmarks):
     image_width, image_height = image.shape[1], image.shape[0]
 
