@@ -1,0 +1,15 @@
+h1{
+    background: linear-gradient(to right , orange , yellow);
+    color: transparent;
+    -webkit-background-clip: text;
+}
+.contributer::-webkit-scrollbar{
+    display: none;
+}
+
+/* Contributer.css */
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+    /* Hide any overflow */
+}
