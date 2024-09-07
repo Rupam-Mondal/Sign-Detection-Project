@@ -302,4 +302,4 @@ def open_camera():
     return jsonify({"message": "Camera feed stopped and window closed"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
