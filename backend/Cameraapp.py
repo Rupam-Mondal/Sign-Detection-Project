@@ -305,6 +305,8 @@ def open_camera():
                         print("Letter:", classes[np.argmax(predictions)])
                         if cv2.waitKey(1) & 0xFF == ord('c'):
                                 char_array.append(classes[np.argmax(predictions)])
+                        if cv2.waitKey(1) & 0xFF == ord('s'):
+                                char_array.append(" ")
                         cv2.putText(debug_image, classes[np.argmax(predictions)], (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                     debug_image = draw_landmarks(debug_image, landmark_list)
 
