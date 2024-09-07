@@ -39,7 +39,7 @@ function Custompage() {
                 </div>
                 <div className="h-1/5 w-full flex justify-center items-center">
                     <div className="flex h-3/5 justify-center items-center gap-3">
-                        <div className="h-full bg-gray-600 w-96 rounded-lg outline-none text-xl text-gray-300 px-5">
+                        <div className="h-full bg-gray-600 w-96 rounded-lg outline-none text-xl text-gray-300 px-5 overflow-x-scroll output-box">
                             {data && data.map((v, i) => {
                                 return <span key={i}>{v}</span>
                             })}

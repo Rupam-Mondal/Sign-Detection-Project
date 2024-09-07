@@ -301,12 +301,10 @@ def open_camera():
                     pre_processed_landmark_list = np.array(pre_processed_landmark_list)
                     pre_processed_landmark_list = np.reshape(pre_processed_landmark_list, (1,42,))
                     predictions = loaded_model.predict(pre_processed_landmark_list)
-                    if max(predictions[0]) >0.9897:
+                    if max(predictions[0]) >0.98:
                         print("Letter:", classes[np.argmax(predictions)])
-                        new_char = classes[np.argmax(predictions)]
-                        if new_char!= prev_char :
+                        if cv2.waitKey(1) & 0xFF == ord('c'):
                                 char_array.append(classes[np.argmax(predictions)])
-                        prev_char = new_char
                         cv2.putText(debug_image, classes[np.argmax(predictions)], (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                     debug_image = draw_landmarks(debug_image, landmark_list)
 
