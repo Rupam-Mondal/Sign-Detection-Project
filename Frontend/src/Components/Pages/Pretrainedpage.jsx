@@ -1,10 +1,11 @@
 import signimage from '../../assets/Images/signimage.jpg';
 import { Cameratrigger } from '../services/Cameratriger';
+import { Customcameratrigger } from '../services/Customcameratrigger';
 
 function Pretrainedpage() {
 
     const handleCameraClick = async () => {
-        Cameratrigger()
+        Customcameratrigger()
     }
 
     return (

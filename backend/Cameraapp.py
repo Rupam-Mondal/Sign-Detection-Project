@@ -260,7 +260,7 @@ CORS(app)  # Enable CORS to allow communication between React frontend and Flask
 
 @app.route('/', methods=['POST'])  # Make sure this matches the route you're hitting in React
 def open_camera():
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 400)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
 
