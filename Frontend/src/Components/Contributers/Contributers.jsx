@@ -1,5 +1,6 @@
 import Marquee from 'react-fast-marquee'
 import './Contributer.css'
+import sandipanSeth from '../../assets/Images/sandipan.jpg'
 
 function Contributers(){
     return (
@@ -50,7 +51,7 @@ function Contributers(){
 
                         <div className='bg-gradient-to-r from-gray-800 to-gray-600 h-96 w-64 p-4 rounded-lg shadow-lg mr-4'>
                             <div className='h-2/5 mb-4 flex items-center justify-center'>
-                                <img src="https://media.licdn.com/dms/image/v2/D5603AQH9mUdfsOi3xg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1699857972570?e=1730937600&v=beta&t=PlcQQII445pI9cq7SqS_blwLm2rAeWVbYOvP0duKvCI" alt="Profile" className='w-32 h-32 object-cover rounded-full border-4 border-blue-500' />
+                                <img src={sandipanSeth} alt="Profile" className='w-32 h-32 object-cover rounded-full border-4 border-blue-500' />
                             </div>
                             <div className='h-2/5 flex flex-col justify-between'>
                                 <div>
