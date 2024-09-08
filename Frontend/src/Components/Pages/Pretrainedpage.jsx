@@ -1,12 +1,24 @@
+import { useEffect } from 'react';
 import signimage from '../../assets/Images/signimage.jpg';
 import { Cameratrigger } from '../services/Cameratriger';
 import { Customcameratrigger } from '../services/Customcameratrigger';
+import { Wordfetch } from '../services/Wordfetch';
+import { useQuery } from 'react-query';
 
 function Pretrainedpage() {
+    const { data, isLoading, isError, error, refetch } = useQuery('Letter', Wordfetch)
 
     const handleCameraClick = async () => {
         Customcameratrigger()
     }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refetch();
+        }, 200);
+
+        return () => clearInterval(interval);
+    }, [refetch]);
 
     return (
         <>
@@ -29,7 +41,11 @@ function Pretrainedpage() {
                 </div>
                 <div className="h-1/5  w-full flex justify-center items-center">
                     <div className="flex h-3/5 justify-center items-center gap-3">
-                        <input type="text" disabled placeholder={"See the letter for the shown sign"} className="h-full bg-gray-600 w-96 rounded-lg outline-none text-xl text-gray-300 px-5" />
+                        <div className="h-full bg-gray-600 w-96 rounded-lg outline-none text-xl text-gray-300 px-5 overflow-x-scroll output-box">
+                            {data && data.map((v, i) => {
+                                return <span key={i}>{v}</span>
+                            })}
+                        </div>
                         <div className="h-10 w-10 flex justify-center items-center">
                             <i className="fa-solid fa-microphone fa-xl cursor-pointer" style={{ color: "#ffffff" }}></i>
                         </div>

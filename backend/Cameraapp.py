@@ -14,6 +14,11 @@ import mediapipe as mp
 import copy
 import itertools
 import csv
+from flask_socketio import SocketIO
+import threading
+import time
+
+char_array = []
 
 classes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Space']
 
@@ -256,13 +261,22 @@ def draw_landmarks(image, landmark_point):
     return image
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 CORS(app)  # Enable CORS to allow communication between React frontend and Flask backend
 
-@app.route('/', methods=['POST'])  # Make sure this matches the route you're hitting in React
+@socketio.on('connect')
+def handle_connect():
+    """Handle client connection."""
+    print('Client connected')
+    emit('array_update', {'data': char_array})
+
+  # Make sure this matches the route you're hitting in React
 def open_camera():
     cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 400)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
+    prev_char = ''
+    new_char = ''
 
     if not cap.isOpened():
         return jsonify({"error": "Could not access the camera"}), 500
@@ -287,7 +301,13 @@ def open_camera():
                     pre_processed_landmark_list = np.array(pre_processed_landmark_list)
                     pre_processed_landmark_list = np.reshape(pre_processed_landmark_list, (1,42,))
                     predictions = loaded_model.predict(pre_processed_landmark_list)
-                    print("Letter:", classes[np.argmax(predictions)])
+                    if max(predictions[0]) >0.98:
+                        print("Letter:", classes[np.argmax(predictions)])
+                        if cv2.waitKey(1) & 0xFF == ord('c'):
+                                char_array.append(classes[np.argmax(predictions)])
+                        if cv2.waitKey(1) & 0xFF == ord('s'):
+                                char_array.append(" ")
+                        cv2.putText(debug_image, classes[np.argmax(predictions)], (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                     debug_image = draw_landmarks(debug_image, landmark_list)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -300,6 +320,15 @@ def open_camera():
     cap.release()
     cv2.destroyAllWindows()
     return jsonify({"message": "Camera feed stopped and window closed"})
+
+@app.route('/', methods=['POST'])
+def start_camera():
+    threading.Thread(target=open_camera).start()
+    return jsonify({"message": "Camera started"}), 200
+
+@app.route('/get_array' , methods=['GET'])
+def get_array():
+    return jsonify(char_array)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
