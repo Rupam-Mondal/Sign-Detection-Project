@@ -15,8 +15,8 @@ function Features(){
     return (
         <>
             <div className="bg-black w-full h-screen flex justify-center items-center gap-20">
-                <Card img={img1} handler={Handler1}/>
-                <Card img={img2} handler={Handler2}/>
+                <Card img={img1} handler={Handler1} text={"Predefined model"}/>
+                <Card img={img2} handler={Handler2} text={"Custom Model"}/>
 
             </div>
         </>
