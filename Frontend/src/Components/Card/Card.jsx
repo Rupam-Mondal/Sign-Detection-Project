@@ -1,6 +1,6 @@
 
 
-function Card({img , handler , text}){
+function Card({img , handler, text}){
     return (
         <>
             <div className="bg-[#1f1f1f] h-[390px] w-80 cursor-pointer rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
